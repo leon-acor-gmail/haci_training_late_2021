@@ -12,7 +12,7 @@ if($result->desc > 0){
 }
 else{
   $objInfoSystem->NewUser($_POST['strData']);
-  $arrJson = array("code"=>"201", "desc"=>"../home/");
+  $arrJson = array("code"=>"201", "desc"=>"../haci/home/");
   $strEcho = json_encode($arrJson);
   $strEcho = base64_encode($strEcho);
   echo($strEcho);

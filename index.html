@@ -43,12 +43,12 @@ body, html {height: 100%}
 <body class="bgColor">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/e7092ec1db.js" crossorigin="anonymous"></script>
-<script src="../scripts/jquery.md5.js"></script>
+<script src="../haci/scripts/jquery.md5.js"></script>
 <script>
 
 $(document).ready(function (){
 $('#btnEntrar').click(function(a){
-  window.location.href = '/login/';
+  window.location.href = '/haci/login/';
 });
 $('#btnRegistrar').click(function(a){
   b = document.getElementsByTagName('form')[0];
@@ -66,7 +66,7 @@ $('#btnRegistrar').click(function(a){
 
     strJson = JSON.stringify(objJson);
     strJsonB64 = btoa(strJson)
-    $.post("../models/modNewUser.php",{strData:strJsonB64},function(strEcho){
+    $.post("../haci/models/modNewUser.php",{strData:strJsonB64},function(strEcho){
       strEcho = atob(strEcho)
       objJson = JSON.parse(strEcho);
       if(objJson.code == '200'){
@@ -86,7 +86,7 @@ $('#btnRegistrar').click(function(a){
 </script>
 <div class="w3-row w3-text-white">
   <div class="w3-container w3-third">
-    <img src="../images/logo1.svg" alt="logo hagamos cine">
+    <img src="../haci/images/logo1.svg" alt="logo hagamos cine">
     <form>
       <div class="w3-padding-large fuente2 w3-xxlarge">
         Registro de nuevo usuario
@@ -103,9 +103,9 @@ $('#btnRegistrar').click(function(a){
   <div class="w3-container w3-twothird">
     <label class="fuente1 w3-xlarge">¿Quieres pertenecer al mundo del cine?</label>
     <label class="fuente2 w3-xxlarge">Registrate y “Hagamos Cine”</label>
-    <img src="../images/cinta.svg" alt="icono de cinta" class="icoSize">
+    <img src="../haci/images/cinta.svg" alt="icono de cinta" class="icoSize">
     <label class="fuente2 w3-xxlarge">Miles de empleos en todos los departamentos involucrados en la creación y distribución del cine en México y Latino-América</label>
-    <img src="../images/claqueta.svg" alt="icono de claqueta" class="icoSize">
+    <img src="../haci/images/claqueta.svg" alt="icono de claqueta" class="icoSize">
     <label class="fuente1 w3-xlarge"></label>
   </div>
 </div>
