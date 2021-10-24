@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<title>Hagamos Cine</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&family=Work+Sans:wght@100&display=swap" rel="stylesheet">
+
+<style>
+.icoSize{
+  width: 150px;
+  height: auto;
+}
+.fuente1{
+  font-family: 'Space Grotesk', sans-serif;
+}
+.fuente2{
+  font-family: 'Work Sans', sans-serif;
+}
+body, html {height: 100%}
+.bgimg {
+  background-image: url('../images/bgimage.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+.bgColor{
+  background-color: #191824;
+}
+.btnColor{
+  background-color: #de552d;
+}
+.txtColor{
+  color:#de552d;
+}
+.txtColor:hover{
+  color:#ff5722;
+}
+</style>
+<body class="bgColor">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/e7092ec1db.js" crossorigin="anonymous"></script>
+<script src="../scripts/jquery.md5.js"></script>
+<script>
+
+$(document).ready(function (){
+$('#btnEntrar').click(function(a){
+  window.location.href = '/login/';
+});
+$('#btnRegistrar').click(function(a){
+  b = document.getElementsByTagName('form')[0];
+  if(b.checkValidity())
+  {
+    username = $('#username').val();
+    useremail = $('#useremail').val();
+    userpassword = $.md5($('#userpassword').val());
+
+    objJson = {
+      username:username,
+      useremail:useremail,
+      userpassword:userpassword
+    }
+
+    strJson = JSON.stringify(objJson);
+    strJsonB64 = btoa(strJson)
+    $.post("../models/modNewUser.php",{strData:strJsonB64},function(strEcho){
+      strEcho = atob(strEcho)
+      objJson = JSON.parse(strEcho);
+      if(objJson.code == '200'){
+        alert(objJson.desc);
+      }
+      else if(objJson.code == '201'){
+        window.location.href = objJson.desc;
+      }
+
+    });
+    a.preventDefault();
+  }
+});
+
+
+});
+</script>
+<div class="w3-row w3-text-white">
+  <div class="w3-container w3-third">
+    <img src="../images/logo1.svg" alt="logo hagamos cine">
+    <form>
+      <div class="w3-padding-large fuente2 w3-xxlarge">
+        Registro de nuevo usuario
+      </div>
+      <p><label class="fuente1 w3-large">Nombre</label><input id="username" class="w3-input" type="text" maxlength="40" placeholder="Escribe tu nombre" required></p>
+      <p><label class="fuente1 w3-large">Correo</label><input class="w3-input" id="useremail" type="email" maxlength="50" placeholder="Escribe tu correo" required><p>
+      <p><label class="fuente1 w3-large">Contraseña</label><input class="w3-input" id="userpassword" type="password" minlength="8" maxlength="24" placeholder="Escribe tu contraseña" required></p>
+      <button id="btnRegistrar" class="btn btn-success">Enviar</button>
+      <input id="btnEntrar" type="button" value="Ya tengo cuenta" class="btn btn-primary">
+    </form>
+    <a href="https://www.facebook.com/Hagamoscinemx" class="txtColor w3-large" style="text-decoration: none;"><i class="fab fa-facebook"></i> @hagamoscinemx</a>
+    <a href="https://www.instagram.com/hagamos.cine" class="txtColor w3-large" style="text-decoration: none;"><i class="fab fa-instagram"></i> @hagamos.cine</a>
+  </div>
+  <div class="w3-container w3-twothird">
+    <label class="fuente1 w3-xlarge">¿Quieres pertenecer al mundo del cine?</label>
+    <label class="fuente2 w3-xxlarge">Registrate y “Hagamos Cine”</label>
+    <img src="../images/cinta.svg" alt="icono de cinta" class="icoSize">
+    <label class="fuente2 w3-xxlarge">Miles de empleos en todos los departamentos involucrados en la creación y distribución del cine en México y Latino-América</label>
+    <img src="../images/claqueta.svg" alt="icono de claqueta" class="icoSize">
+    <label class="fuente1 w3-xlarge"></label>
+  </div>
+</div>
+<p class="w3-text-white">Todos los derechos reservados 2021 - hagamoscine.com</p>
+</body>
+</html>
